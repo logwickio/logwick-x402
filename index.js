@@ -129,6 +129,33 @@ app.use(
         mimeType: "application/json",
         extensions: {
           ...declareDiscoveryExtension({
+            input: {
+              type: "http",
+              method: "POST",
+              body: {
+                agent: "gpt-4o",
+                action: "email_draft",
+                status: "success",
+                input: "Draft a follow-up email",
+                output: "Subject: Following up...",
+                tokens: 312,
+                latency_ms: 1842,
+              },
+              bodyType: "json",
+              schema: {
+                type: "object",
+                required: ["agent", "action"],
+                properties: {
+                  agent: { type: "string" },
+                  action: { type: "string" },
+                  status: { type: "string" },
+                  input: { type: "string" },
+                  output: { type: "string" },
+                  tokens: { type: "number" },
+                  latency_ms: { type: "number" },
+                },
+              },
+            },
             output: {
               example: {
                 id: "550e8400-e29b-41d4-a716-446655440000",
