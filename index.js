@@ -47,7 +47,15 @@ const bazaarExtension = {
     input: {
       type: "http",
       method: "POST",
-      body: {},
+      body: {
+        agent: "gpt-4o",
+        action: "email_draft",
+        status: "success",
+        input: "Draft a follow-up email",
+        output: "Subject: Following up...",
+        tokens: 312,
+        latency_ms: 1842,
+      },
       bodyType: "json",
     },
     output: {
@@ -57,6 +65,32 @@ const bazaarExtension = {
         timestamp: "2026-05-04T12:00:00.000Z",
         status: "ingested",
       },
+    },
+  },
+  inputSchema: {
+    type: "object",
+    required: ["agent", "action"],
+    properties: {
+      agent: { type: "string", description: "AI model or agent name (e.g. gpt-4o, claude-3-5-sonnet)" },
+      action: { type: "string", description: "What the agent was doing (e.g. email_draft, code_review)" },
+      status: { type: "string", enum: ["success", "error", "pending"], description: "Outcome of the action" },
+      input: { type: "string", description: "The prompt or input sent to the agent" },
+      output: { type: "string", description: "The response or output from the agent" },
+      tokens: { type: "number", description: "Total tokens used" },
+      latency_ms: { type: "number", description: "Time taken in milliseconds" },
+      cost_usd: { type: "number", description: "Estimated cost in USD" },
+      user: { type: "string", description: "User or customer identifier" },
+      tags: { type: "array", items: { type: "string" }, description: "Optional tags for filtering" },
+      metadata: { type: "object", description: "Any additional key-value data" },
+    },
+  },
+  outputSchema: {
+    type: "object",
+    required: ["id", "timestamp", "status"],
+    properties: {
+      id: { type: "string", description: "Log entry ID" },
+      timestamp: { type: "string", description: "ISO timestamp of when the log was stored" },
+      status: { type: "string", description: "ingested" },
     },
   },
   schema: {
