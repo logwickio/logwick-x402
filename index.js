@@ -90,7 +90,7 @@ app.use(
           network: "eip155:8453",
           payTo: PAYTO,
         }],
-        resource: "https://web-production-07aa5.up.railway.app/agent-log",
+        resource: "https://x402.logwick.io/agent-log",
         description: "Ingest one AI agent audit log entry to Logwick.",
         mimeType: "application/json",
         extensions: { bazaar: bazaarExtension },
