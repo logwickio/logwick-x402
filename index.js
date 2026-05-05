@@ -43,20 +43,18 @@ resourceServer.register("eip155:8453", new ExactEvmScheme());
 resourceServer.registerExtension(bazaarResourceServerExtension);
 
 const bazaarExtension = declareDiscoveryExtension({
+  input: {
+    type: "http",
+    method: "POST",
+    body: {},
+    bodyType: "json",
+  },
   output: {
+    type: "json",
     example: {
       id: "550e8400-e29b-41d4-a716-446655440000",
       timestamp: "2026-05-04T12:00:00.000Z",
       status: "ingested",
-    },
-    schema: {
-      type: "object",
-      required: ["id", "timestamp", "status"],
-      properties: {
-        id: { type: "string" },
-        timestamp: { type: "string" },
-        status: { type: "string" },
-      },
     },
   },
 });
